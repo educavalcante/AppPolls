@@ -42,7 +42,7 @@ export async function guessRoutes(fastify: FastifyInstance){
 
     
 
-    const guessx = await prisma.guess.findUnique({
+    const guess = await prisma.guess.findUnique({
       where: {
         participantId_gameId: {
           participantId: participant.id,
@@ -50,8 +50,8 @@ export async function guessRoutes(fastify: FastifyInstance){
         }
       }
     })
-    console.log(guessx);
-    if (guessx) {
+    console.log(guess);
+    if (guess) {
       return reply.status(400).send({
         message: "You already sent a guess to this game on this poll.",
       })
