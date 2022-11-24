@@ -25,6 +25,7 @@
     "@googleapis/docs": "^2.0.0",
     "@prisma/client": "^4.6.1",
     "fastify": "^4.9.2",
+    "node-fetch": "^3.3.0",
     "short-unique-id": "^4.4.4",
     "zod": "^3.19.1"
   }

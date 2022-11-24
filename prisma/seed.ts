@@ -40,7 +40,7 @@ async function main() {
             firstTeamCountryCode: 'BR',
             secondTeamCountryCode: 'AR',
 
-            guessess: {
+            guesses: {
                 create: {
                     firstTeamPoints: 2,
                     secondTeamPoints: 1,
