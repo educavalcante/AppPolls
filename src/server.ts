@@ -17,24 +17,27 @@ async function bootstrap(){
    const fastify = Fastify({
    logger: true,
    })
+   try {
+      await fastify.register(cors, {
+         origin: true,
+      })
 
-   await fastify.register(cors, {
-      origin: true,
-   })
+      await fastify.register(jwt, {
+         secret: 'nwlcopa',
+      })
+   //a frase secreta deve ser definida numa variável de ambiente
 
-await fastify.register(jwt, {
-   secret: 'nwlcopa',
-})
-//a frase secreta deve ser definida numa variável de ambiente
+      await fastify.register(authRoutes)
+      await fastify.register(gameRoutes)
+      await fastify.register(guessRoutes)
+      await fastify.register(userRoutes)
+      await fastify.register(poolRoutes)
 
-await fastify.register(authRoutes)
-await fastify.register(gameRoutes)
-await fastify.register(guessRoutes)
-await fastify.register(userRoutes)
-await fastify.register(poolRoutes)
-
-   await fastify.listen({ port: 3333});
+      await fastify.listen({ port: 3333, host: '0.0.0.0' })
+   } catch (err) {
+      fastify.log.error(err)
+      process.exit(1)
+   }
 }
-
 
 bootstrap()

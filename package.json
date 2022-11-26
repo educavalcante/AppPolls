@@ -24,6 +24,7 @@
     "@fastify/jwt": "^6.3.3",
     "@googleapis/docs": "^2.0.0",
     "@prisma/client": "^4.6.1",
+    "axios": "^1.2.0",
     "fastify": "^4.9.2",
     "node-fetch": "^3.3.0",
     "short-unique-id": "^4.4.4",
