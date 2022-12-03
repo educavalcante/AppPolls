@@ -11,13 +11,16 @@ export async function guessRoutes(fastify: FastifyInstance){
 
     fastify.post('/pools/:poolId/games/:gameId/guesses', 
     {onRequest: [authenticate]},
+    
     async (request, reply) =>{
+      console.log(request.params)
+      console.log(request.body)
       const createGuessParams = z.object({
         poolId: z.string(),
         gameId: z.string(),
       }) 
       
-      const createGuessBody = z.object({
+      const createGuessBody = z.object({    
         firstTeamPoints: z.number(),
         secondTeamPoints: z.number(),        
       })
@@ -35,8 +38,10 @@ export async function guessRoutes(fastify: FastifyInstance){
     })
 
     if (!participant) {
+      console.log('allowed to create a guess inside this poll')
       return reply.status(400).send({
         message: "You're not allowed to create a guess inside this poll.",
+        
       })
     }
 
@@ -50,6 +55,7 @@ export async function guessRoutes(fastify: FastifyInstance){
     })
   
     if (guess) {
+      console.log('already sent a guess to this game on this pool')
       return reply.status(400).send({
         message: "You already sent a guess to this game on this pool.",
       })
@@ -62,12 +68,14 @@ export async function guessRoutes(fastify: FastifyInstance){
     })
 
     if (!game) {
+      console.log('Game not found')
       return reply.status(400).send({
         message: "Game not found"
       })
     }
 
     if (game.date < new Date()) {
+      console.log('You cannot send guesses after the game date')
       return reply.status(400).send({
         message: "You cannot send guesses after the game date."
       })
